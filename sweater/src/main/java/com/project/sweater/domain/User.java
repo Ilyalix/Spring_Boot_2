@@ -16,6 +16,8 @@ public class User implements UserDetails { // имплементируем UserD
     private Long id;
     private String username;
     private String password;
+    @Transient
+    private String password2;
     private boolean active;
 
     // создание доп. таблицы автоматич. для хранения Enam (способ fetch = FetchType.EAGER (как данные будут подгружаться!),
@@ -98,6 +100,14 @@ public class User implements UserDetails { // имплементируем UserD
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() { // права, роли пользователей
         return getRoles();
+    }
+
+    public String getPassword2() {
+        return password2;
+    }
+
+    public void setPassword2(String password2) {
+        this.password2 = password2;
     }
 }
 

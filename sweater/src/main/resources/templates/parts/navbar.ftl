@@ -22,10 +22,15 @@
                 <a class="nav-link" href="/user">List of users</a>
             </li>
             </#if>
+              <#if user??>  <#--приводим user к булев.типу, если он имеется выполн.условия -->
+            <li class="nav-item">
+                <a class="nav-link" href="/user/profile">Profile</a>
+            </li>
+              </#if>
         </ul>
 
          <#if isAdmin || isUser>
-        <div class="navbar-text mr-3 ">${name}</div>  <#-- подгружаем name из security -->
+        <div class="navbar-text mr-3">${name}</div>  <#-- подгружаем name из security -->
         <@l.logout />
          </#if>
 

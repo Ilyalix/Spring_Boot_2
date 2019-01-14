@@ -7,9 +7,13 @@ import com.project.sweater.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.validation.Valid;
 import java.util.Collections;
 import java.util.Map;
 
@@ -28,29 +32,39 @@ public class RegistrationController {
     }
 
     @PostMapping("/registration") // post запрос
-    public String addUser(User user, Map<String,Object> model){ // поступает на вход объект User
-       User UsFromDb = userRepository.findByUsername(user.getUsername()); // найти пользователя
+    public String addUser(@Valid User user, Model model) { // поступает на вход объект User
+      User UsFromDb = userRepository.findByUsername(user.getUsername()); // найти пользователя
 
-            if(UsFromDb != null) {
-                model.put("message", "User exists!");
+        if(user.getUsername().isEmpty() || user.getPassword().isEmpty() || user.getPassword2().isEmpty()) {
+                model.addAttribute("message", "One field is empty!");
                 return "registration";
-           }
-            if(user.getUsername().isEmpty()) {
-                model.put("message", "User is empty!");
-                return "registration";
-            }
+        }
 
-            if(user.getUsername().length()< 3 || user.getPassword().length()< 3) {
-            model.put("message", "login or password is short!");
+        if(UsFromDb != null) {
+            model.addAttribute("message", "User exists!");
             return "registration";
         }
 
-        user.setActive(true);
-        user.setRoles(Collections.singleton(Role.USER)); // создание set-a с одним единственным значением USER
-        user.setPassword(passwordEncoder.encode(user.getPassword())); // устанавливаем шифров. паролей
-        userRepository.save(user);
+        if (!user.getPassword().equals(user.getPassword2())) {
+            model.addAttribute("message", "Passwords are different!");
+            return "registration";
+        }
 
-        return "redirect:/login"; // при успешной авториз. возвращаемся на страницу login
+        if(user.getUsername().length()< 3 || user.getPassword().length()< 3 || user.getPassword2().length()< 3) {
+            model.addAttribute("message", "login or password is short!");
+            return "registration";
+        }
+
+        if (user.getPassword().equals(user.getPassword2())) {
+            user.setActive(true);
+            user.setRoles(Collections.singleton(Role.USER)); // создание set-a с одним единственным значением USER
+            user.setPassword(passwordEncoder.encode(user.getPassword())); // устанавливаем шифров. паролей
+            userRepository.save(user);
+        }
+
+        model.addAttribute("mess", "Are you registerd!");
+        return "login";
+//        return "redirect:/login"; // при успешной авториз. возвращаемся на страницу login
 
     }
 }

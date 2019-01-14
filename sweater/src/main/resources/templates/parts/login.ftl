@@ -15,9 +15,26 @@
         </div>
     </div>
     <input type="hidden" name="_csrf" value="${_csrf.token}" />
+    <#if isRegisterForm>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Repeat password:</label>
+        <div class="col-sm-6">
+            <input type="password" name="password2" class="form-control" placeholder="Password" />
+        </div>
+    </div>
+    </#if>
     <#--показываем эту ссылку если это НЕ форма регистрации-->
     <#if !isRegisterForm><a href="/registration">Add new user</a></#if>
     <button class="btn btn-primary" type="submit"><#if isRegisterForm>Create<#else>Sign In</#if></button>
+
+    <#if !isRegisterForm>
+        <div class="form-group row mt-3">
+        <div class="col-sm-5">
+            ${mess?ifExists}
+        <div />
+    <div />
+    </#if>
+
 </form>
 </#macro>
 

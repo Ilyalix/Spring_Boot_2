@@ -9,7 +9,7 @@ public class Message {
     @Id  // идентификатор
     @GeneratedValue(strategy=GenerationType.AUTO) // автоматич. idea в нужном порядке загрузит
 
-    private Integer id;
+    private Long id;
     private String text;
     private String tag;
 
@@ -32,11 +32,11 @@ public class Message {
         return author !=null ? author.getUsername() : "<none>"; // если автор не равен нулю(имеется), возвращаем Username, в противном случаее "none"
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

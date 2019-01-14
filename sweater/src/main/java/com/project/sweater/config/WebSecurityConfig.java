@@ -33,7 +33,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private UserService userService;
 
-    @Bean
+   @Bean
     public PasswordEncoder getPasswordEncoder(){
         return new BCryptPasswordEncoder(8);
     }
@@ -69,6 +69,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override // здесь мы берем данные из БД (переопределяем метод Configure Alt-Ins)
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userService)
-                .passwordEncoder(passwordEncoder); // шифрование паролей
+               .passwordEncoder(passwordEncoder); // шифрование паролей
     }
 }
