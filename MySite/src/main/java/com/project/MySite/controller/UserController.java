@@ -1,19 +1,17 @@
-package com.project.sweater.controller;
+package com.project.MySite.controller;
 
-import com.project.sweater.Service.UserService;
-import com.project.sweater.UserRepository.UserRepository;
-import com.project.sweater.domain.Role;
-import com.project.sweater.domain.User;
+import com.project.MySite.Service.UserService;
+import com.project.MySite.UserRepository.UserRepository;
+import com.project.MySite.domain.Role;
+import com.project.MySite.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.Set;
@@ -52,7 +50,7 @@ public class UserController {
     public String userSave(
             @RequestParam String username,
             @RequestParam Map<String, String> form, // передаем на вход поля (user,admin) и прочее типо is и токен
-            @RequestParam("userId") User user // получаем пользователя из БД
+            @RequestParam("userId") User user // получаем пользователя
     ) {
         user.setUsername(username); // устанавливаем user новое имя
 
@@ -115,8 +113,7 @@ public class UserController {
         }
 
         model.addAttribute("username", user.getUsername());
-        model.addAttribute("message", "Passwords have been changed!");
+        model.addAttribute("message", "Password has been changed!");
         return "profile";
-
     }
 }

@@ -1,4 +1,4 @@
-package com.project.sweater.domain;
+package com.project.MySite.domain;
 
 import javax.persistence.*;
 

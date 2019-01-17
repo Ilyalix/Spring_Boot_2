@@ -1,4 +1,5 @@
 <#import "parts/common.ftl" as c>
+<#include "parts/security.ftl">
 
 <@c.page>
 <#--<div>-->
@@ -36,15 +37,17 @@
 </div>
 
 <#--<br>Удалить:</br>-->
+<#if isAdmin>
 <div class="form-row">
     <div class="form-group col-md-6">
     <form method="post" action="delete" class="form-inline">
-        <input type="text" name="delete" class="form-control" placeholder="Delete by Tag">
+        <input type="text" name="delete" class="form-control" placeholder="Delete by text">
         <input type="hidden" name="_csrf" value="${_csrf.token}"/>
         <button type="submit" class="btn btn-primary ml-2" >Delete</button>
     </form>
     </div>
 </div>
+</#if>
 
 <br>List of messages:</br>
 
@@ -64,11 +67,24 @@
     <div class="m-1" >
         <i>Author:</i><strong> ${mess.authorName}</strong>
     </div>
+    <#if mess.getAuthorName() == name || isAdmin>
+    <div>
+     <form method="post" action="/home/${mess.id}">
+         <input type="hidden" name="_csrf" value="${_csrf.token}"/>
+         <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+     </form>
+    </div>
+    </#if>
 </div>
-
-<#else>
+ <#else>
 No messages
 </#list>
 </div>
+
+  <div class="form-group row">
+      <div class="col-sm-5">
+          ${ms?ifExists}
+      </div>
+  </div>
 
 </@c.page>

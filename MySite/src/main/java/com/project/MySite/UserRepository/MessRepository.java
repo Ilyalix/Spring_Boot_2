@@ -1,6 +1,6 @@
-package com.project.sweater.UserRepository;
+package com.project.MySite.UserRepository;
 
-import com.project.sweater.domain.Message;
+import com.project.MySite.domain.Message;
 
 import org.springframework.data.repository.CrudRepository;
 
@@ -13,5 +13,5 @@ import java.util.List;
 
 public interface MessRepository extends CrudRepository<Message, Long> {
             List<Message> findByTag(String tag);
-            List<Message> deleteByTag(String tag);
+            List<Message> deleteByText(String text);
 }

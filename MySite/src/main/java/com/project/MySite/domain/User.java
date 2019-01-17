@@ -1,4 +1,4 @@
-package com.project.sweater.domain;
+package com.project.MySite.domain;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -20,7 +20,7 @@ public class User implements UserDetails { // имплементируем UserD
     private String password2;
     private boolean active;
 
-    // создание доп. таблицы автоматич. для хранения Enam (способ fetch = FetchType.EAGER (как данные будут подгружаться!),
+    // создание доп. таблицы автоматич. для хранения Enum (способ fetch = FetchType.EAGER (как данные будут подгружаться!),
     // то есть мало данных в таблице, и подгружаем всех сразу -> EAGER)
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
     // создаем таблицу user_role (для roles), которая соединяется с user_id (в roles)

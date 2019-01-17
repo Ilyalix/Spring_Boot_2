@@ -1,14 +1,15 @@
-package com.project.sweater.controller;
+package com.project.MySite.controller;
 
-import com.project.sweater.UserRepository.MessRepository;
-import com.project.sweater.domain.Message;
-import com.project.sweater.domain.User;
+import com.project.MySite.UserRepository.MessRepository;
+import com.project.MySite.UserRepository.UserRepository;
+import com.project.MySite.domain.Message;
+import com.project.MySite.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -19,12 +20,12 @@ import java.util.Map;
 public class MessageController {
     @Autowired
     private MessRepository messRepository;
-    // userRepository создает экземпляр бина,
-    // он учитывает соответствующий интерфейс и передает ссылку на соответствующий ресурс.
 
-    @GetMapping ("/home")// обрабатываем просто get запросы в URL
-    public String main (@RequestParam(required = false, defaultValue = "") String filter, Model model){
-        Iterable<Message> mess; // найти все из userRepository и поменстить в mess
+    // userRepository создает экземпляр бина,
+
+    @GetMapping("/home")
+    public String main(@RequestParam(required = false, defaultValue = "") String filter, Model model) {
+        Iterable<Message> mess;
 
         if (filter != null && !filter.isEmpty()) {
             mess = messRepository.findByTag(filter);
@@ -33,38 +34,35 @@ public class MessageController {
         }
 
         model.addAttribute("messages", mess);
-        model.addAttribute("filter", filter); // передаем фильтр в форму в main
+        model.addAttribute("filter", filter);
 
         return "main";
     }
 
-    @PostMapping("/home") // обрабатываем post запросы в форме в html
-    public String add (
-            @AuthenticationPrincipal User user, // добавляем объект User
-            @RequestParam String text,
-            @RequestParam String tag, Map<String, Object> model) {
-        Iterable<Message> messsg;
+    @PostMapping("/home")
+    public String add(@AuthenticationPrincipal User user, // добавляем объект User
+                      @RequestParam String text, @RequestParam String tag, Map<String, Object> model) {
+        Iterable<Message> messages;
 
-        // сохраняем
         if ((text != null && !text.isEmpty()) && (tag != null && !tag.isEmpty())) {
             Message mess = new Message(text, tag, user);
             messRepository.save(mess);
-            messsg = messRepository.findAll();
+            messages = messRepository.findAll();
         } else {
-           messsg = messRepository.findAll();// найти все из userRepository и поместить в mess (alt-ctrl-V)
+            messages = messRepository.findAll();
         }
-           model.put("messages", messsg);
+        model.put("messages", messages);
 
-           return "main";
-        }
+        return "main";
+    }
 
-    @Transactional
     @PostMapping("delete")
-    public String delete(@RequestParam String delete, Map<String, Object> model) {
+    @Transactional
+    public String delete(@RequestParam(required = false, defaultValue = "") String delete, Map<String, Object> model) {
         Iterable<Message> messages;
 
         if (delete != null && !delete.isEmpty()) {
-            messages = messRepository.deleteByTag(delete);
+            messages = messRepository.deleteByText(delete);
         } else {
             messages = messRepository.findAll();
         }
@@ -74,7 +72,38 @@ public class MessageController {
 
         return "main";
     }
+
+    @PostMapping("/home/{id}")
+    @Transactional
+    public String delete(@PathVariable Long id, Model model) {
+        Iterable<Message> mess;
+
+        messRepository.deleteById(id);
+        mess = messRepository.findAll();
+
+        model.addAttribute("messages", mess);
+
+        return "redirect:/home";
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 // @RequestParam выдергивает значение либо из post запроса (форма в main), либо get запрос из url как пример с greeting

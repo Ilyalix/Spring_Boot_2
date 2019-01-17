@@ -1,14 +1,33 @@
-package com.project.sweater.controller;
+package com.project.MySite.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-
-import java.util.Map;
 
 @Controller
 public class GreetingController {
+
+    @GetMapping("/") // аннотация
+    public String greeting(Model model) {
+        return "greeting";
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// ----------------------------------------------------------------------------------------------
 
 //    @GetMapping("/greeting") // аннотация
 //    public String greeting(
@@ -19,17 +38,14 @@ public class GreetingController {
 //        return "greeting";
 //    }
 
-    @GetMapping("/") // аннотация
-    public String greeting(Model model) {
-          return "greeting";
-    }
+
 
 //    @GetMapping("/Hi") // аннотация
 //    public String hi (Map<String, Object> model){
 //        model.put("some", "World");
 //        return "greeting";
 //    }
-}
+
 
 // @RequestParam выдергивает значение либо из post запроса (форма в main), либо get запрос из url как пример с greeting
 

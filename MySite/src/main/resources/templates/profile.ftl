@@ -12,7 +12,7 @@
     <div class="form-group row">
         <label class="col-sm-2 col-form-label">Password:</label>
         <div class="col-sm-6">
-            <input type="password" name="password2" class="form-control" placeholder="Repeat password" />
+            <input type="password" name="password2" class="form-control" placeholder="Confirm password" />
         </div>
     </div>
     <input type="hidden" name="_csrf" value="${_csrf.token}" />

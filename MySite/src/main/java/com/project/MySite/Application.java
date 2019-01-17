@@ -1,4 +1,4 @@
-package com.project.sweater;
+package com.project.MySite;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,21 +1,18 @@
-package com.project.sweater.controller;
+package com.project.MySite.controller;
 
-import com.project.sweater.UserRepository.UserRepository;
-import com.project.sweater.domain.Role;
-import com.project.sweater.domain.User;
+import com.project.MySite.UserRepository.UserRepository;
+import com.project.MySite.domain.Role;
+import com.project.MySite.domain.User;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
 import java.util.Collections;
-import java.util.Map;
 
 @Controller
 public class RegistrationController {
@@ -25,13 +22,12 @@ public class RegistrationController {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-// возвращаем view
     @GetMapping("/registration") // get запрос, просто возращает view
     public String registration(){
         return "registration";
     }
 
-    @PostMapping("/registration") // post запрос
+    @PostMapping("/registration")
     public String addUser(@Valid User user, Model model) { // поступает на вход объект User
       User UsFromDb = userRepository.findByUsername(user.getUsername()); // найти пользователя
 
