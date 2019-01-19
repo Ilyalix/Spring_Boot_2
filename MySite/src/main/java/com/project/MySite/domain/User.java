@@ -16,8 +16,9 @@ public class User implements UserDetails { // имплементируем UserD
     private Long id;
     private String username;
     private String password;
+
     @Transient
-    private String password2;
+    private String password2; // for regist!
     private boolean active;
 
     // создание доп. таблицы автоматич. для хранения Enum (способ fetch = FetchType.EAGER (как данные будут подгружаться!),

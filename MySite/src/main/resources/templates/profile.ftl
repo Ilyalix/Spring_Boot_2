@@ -1,18 +1,28 @@
 <#import "parts/common.ftl" as c>
 
 <@c.page>
-<h5>${username?ifExists}</h5>
-<form method="post" action="/user/profile">
+<div class="form-group row">
+    <div class="col-sm-6">
+        <h6>${username?ifExists}, here you can change your password</h6>
+    </div>
+</div>
+    <form method="post" action="/user/profile">
     <div class="form-group row">
-        <label class="col-sm-2 col-form-label">Password:</label>
+        <label class="col-sm-2 col-form-label">Correct password:</label>
         <div class="col-sm-6">
-            <input type="password" name="password" class="form-control" placeholder="Password" />
+            <input type="password" name="passuser" class="form-control" placeholder="Enter your password" />
         </div>
     </div>
     <div class="form-group row">
-        <label class="col-sm-2 col-form-label">Password:</label>
+        <label class="col-sm-2 col-form-label">New password:</label>
         <div class="col-sm-6">
-            <input type="password" name="password2" class="form-control" placeholder="Confirm password" />
+            <input type="password" name="pass1" class="form-control" placeholder="Enter new password" />
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Confirm password:</label>
+        <div class="col-sm-6">
+            <input type="password" name="pass2" class="form-control" placeholder="Confirm new password" />
         </div>
     </div>
     <input type="hidden" name="_csrf" value="${_csrf.token}" />
@@ -23,7 +33,7 @@
     </div>
 
     <div class="form-group row">
-        <div class="col-sm-3">
+        <div class="col-sm-6">
         ${message?ifExists}
         <div />
     </div>
