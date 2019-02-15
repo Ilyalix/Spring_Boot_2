@@ -24,13 +24,15 @@
     </div>
     </#if>
     <#--показываем эту ссылку если это НЕ форма регистрации-->
-    <#if !isRegisterForm><a href="/registration">Add new user</a></#if>
+    <#if !isRegisterForm><a href="/registration">Sign up</a></#if>
     <button class="btn btn-primary" type="submit"><#if isRegisterForm>Create<#else>Sign In</#if></button>
 
     <#if !isRegisterForm>
         <div class="form-group row mt-3">
         <div class="col-sm-5">
-            ${mess?ifExists}
+           <p class="text-success">
+               ${mess?ifExists}
+           </p>
         <div />
     <div />
     </#if>

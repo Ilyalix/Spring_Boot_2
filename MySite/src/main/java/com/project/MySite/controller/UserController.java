@@ -80,13 +80,13 @@ public class UserController {
 
         if (passuser.isEmpty() || pass1.isEmpty() || pass2.isEmpty()) {
             model.addAttribute("username", user.getUsername());
-            model.addAttribute("message", "One of passwords is empty!");
+            model.addAttribute("message", "You must complete all fields!");
             return "profile";
         }
 
         if (passuser.length() < 3 || pass1.length() < 3 || pass2.length() < 3) {
             model.addAttribute("username", user.getUsername());
-            model.addAttribute("message", "One of passwords is shot!");
+            model.addAttribute("message", "Your password must contain more than three characters!");
             return "profile";
         }
 
@@ -108,12 +108,12 @@ public class UserController {
         if (pass && (pass1.equals(pass2))) {
             if (passuser.equals(pass1)) {
                 model.addAttribute("username", user.getUsername());
-                model.addAttribute("message", "Old password and new password is equals");
+                model.addAttribute("message", "Old password and new password is equal");
             }else{
                 user.setPassword(passwordEncoder.encode(pass1));
                 userRepository.save(user);
                 model.addAttribute("username", user.getUsername());
-                model.addAttribute("message", "Password has been change");
+                model.addAttribute("new_message", "Password has been changed");
             }
         }
         return "profile";

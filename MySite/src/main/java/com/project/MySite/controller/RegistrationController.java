@@ -32,7 +32,7 @@ public class RegistrationController {
       User UsFromDb = userRepository.findByUsername(user.getUsername()); // найти пользователя
 
         if(user.getUsername().isEmpty() || user.getPassword().isEmpty() || user.getPassword2().isEmpty()) {
-                model.addAttribute("message", "One field is empty!");
+                model.addAttribute("message", "You must complete all fields!");
                 return "registration";
         }
 
@@ -47,7 +47,7 @@ public class RegistrationController {
         }
 
         if(user.getUsername().length()< 3 || user.getPassword().length()< 3 || user.getPassword2().length()< 3) {
-            model.addAttribute("message", "login or password is short!");
+            model.addAttribute("message", "login or password must contain more than three characters!");
             return "registration";
         }
 
@@ -58,7 +58,7 @@ public class RegistrationController {
             userRepository.save(user);
         }
 
-        model.addAttribute("mess", "Are you registerd!");
+        model.addAttribute("mess", "You are registered!");
         return "login";
 //        return "redirect:/login"; // при успешной авториз. возвращаемся на страницу login
 

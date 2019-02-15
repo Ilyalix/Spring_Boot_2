@@ -22,5 +22,4 @@ roles varchar(255))
 engine=MyISAM
 
 alter table messages add constraint FKbo3yqsgqk5fk5trqluqpi4ob4 foreign key (user_name) references user (id)
-
 alter table user_role add constraint FK859n2jvi8ivhui0rl0esws6o foreign key (user_id) references user (id)

@@ -34,7 +34,12 @@
 
     <div class="form-group row">
         <div class="col-sm-6">
+            <p class="text-danger">
         ${message?ifExists}
+            </p>
+            <p class="text-success">
+        ${new_message?ifExists}
+            </p>
         <div />
     </div>
 

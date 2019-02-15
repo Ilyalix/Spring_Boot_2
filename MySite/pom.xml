@@ -16,7 +16,7 @@
         <version>2.0.5.RELEASE</version>
     </parent>
 
-      <dependencies>
+    <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -61,7 +61,7 @@
             <version>2.3.0</version>
         </dependency>
 
-        <!--sequrity-->
+        <!--seсurity-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
@@ -86,7 +86,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>ru.javacore.myapp.Main</mainClass>
+                            <mainClass>com.project.MySite.Application</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
@@ -114,11 +114,6 @@
                     </execution>
                 </executions>
             </plugin>
-            <plugin>
-                <groupId>com.heroku.sdk</groupId>
-                <artifactId>heroku-maven-plugin</artifactId>
-                <version>2.0.6</version>
-            </plugin>
 
             <plugin>
                 <artifactId>maven-dependency-plugin</artifactId>
@@ -134,4 +129,4 @@
         </plugins>
     </build>
 
- </project>
+</project>

@@ -15,7 +15,9 @@ Add new user
 
     <div class="form-group row">
         <div class="col-sm-5">
+            <p class="text-danger">
             ${message?ifExists}
-        <div />
+            </p>
+            <div />
     </div>
 </@c.page>
